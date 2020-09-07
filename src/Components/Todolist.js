@@ -1,7 +1,7 @@
 import React from 'react'
 import Todo from './Todo'
 
-export default function Todolist(props) {
+export default function TodoList(props) {
 
     let styles={
         color: "Blue",
@@ -18,8 +18,8 @@ export default function Todolist(props) {
              {
         props.todo.map((todoItem,index)=>{
               return (
-              <ul>
-              <Todo todoItem={todoItem} delete={()=>props.deleteTodoHandler(index)} key={Math.random()*100}></Todo>
+              <ul key={Math.random()*100}>
+              <Todo todoItem={todoItem} delete={()=>props.deleteTodoHandler(index)} key={Math.random()*1000}></Todo>
               </ul>
               )
             })

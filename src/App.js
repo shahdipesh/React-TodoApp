@@ -1,14 +1,15 @@
 import React from "react";
 import "./App.css";
 import Cockpit from "./Components/Cockpit";
-import Todolist from "./Components/Todolist";
+import TodoList from "./Components/TodoList";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.inputRef = React.createRef();
     this.state = {
-      todo: []
+      todo: [],
+      flag:false
     };
   }
 
@@ -22,12 +23,20 @@ class App extends React.Component {
   };
 
   addTodo = (todo) => {
-    let prevName = this.state.todo;
-    let newName = todo;
-    prevName.push(newName)
-    this.setState({
-      todo:prevName
-    })
+    if (!this.state.todo.includes(todo)){
+      let prevName = this.state.todo;
+      let newName = todo;
+      prevName.push(newName)
+      this.setState({
+        todo:prevName,
+        flag:false
+      })
+    }
+    else{
+      this.setState({
+        flag:true
+      })
+    }
   };
 
   deleteTodoHandler=(index)=>{
@@ -46,7 +55,8 @@ class App extends React.Component {
           <Cockpit
             addTodo={this.addTodo}
           ></Cockpit>
-          <Todolist todo={this.state.todo} deleteTodoHandler={(index)=>this.deleteTodoHandler(index)}></Todolist>
+          {this.state.flag?<p style={{color:"red"}}>Duplicate Entry</p> : null}
+          <TodoList  todo={this.state.todo} deleteTodoHandler={(index)=>this.deleteTodoHandler(index)}></TodoList>
         </div>
       </div>
     );
