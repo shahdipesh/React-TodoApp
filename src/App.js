@@ -8,11 +8,7 @@ class App extends React.Component {
     super(props);
     this.inputRef = React.createRef();
     this.state = {
-      todo: [],
-      currentName: {
-        name:null,
-        key:null
-      },
+      todo: []
     };
   }
 
@@ -25,24 +21,21 @@ class App extends React.Component {
     });
   };
 
-  addTodo = () => {
+  addTodo = (todo) => {
     let prevName = this.state.todo;
-    let newName = this.state.currentName;
+    let newName = todo;
     prevName.push(newName)
     this.setState({
       todo:prevName
     })
   };
 
-  deleteTodoHandler=(key)=>{
-   var index= this.state.todo.findIndex((desc)=>{
-     return (desc.key===key)
-    })
-    var newTodo=[...this.state.todo]
-    newTodo.splice(index,1)
-    this.setState({
-      todo:newTodo
-    })
+  deleteTodoHandler=(index)=>{
+  var list = [...this.state.todo]
+  list.splice(index,1)
+  this.setState({
+    todo: list
+  })
   }
 
   render() {
@@ -51,10 +44,9 @@ class App extends React.Component {
         <div>
           <h1>This is a Sample Todo App</h1>
           <Cockpit
-            inputValue={this.nameChangeHandler}
             addTodo={this.addTodo}
           ></Cockpit>
-          <Todolist todo={this.state.todo} deleteTodoHandler={this.deleteTodoHandler}></Todolist>
+          <Todolist todo={this.state.todo} deleteTodoHandler={(index)=>this.deleteTodoHandler(index)}></Todolist>
         </div>
       </div>
     );

@@ -7,8 +7,7 @@ export default function Todolist(props) {
         color: "Blue",
         width: "400px",
         margin: "auto",
-        textAlign: "center",
-        border: "1px solid grey",
+        textAlign: "left",
         marginTop: "20px",
         paddingBottom: "10px",
     }
@@ -17,8 +16,12 @@ export default function Todolist(props) {
     return (
         <div style={styles}>
              {
-        props.todo.map((todoItem)=>{
-              return <Todo todoItem={todoItem.name} delete={()=>props.deleteTodoHandler(todoItem.key)} key={Math.random()*100}></Todo>
+        props.todo.map((todoItem,index)=>{
+              return (
+              <ul>
+              <Todo todoItem={todoItem} delete={()=>props.deleteTodoHandler(index)} key={Math.random()*100}></Todo>
+              </ul>
+              )
             })
           }
         </div>

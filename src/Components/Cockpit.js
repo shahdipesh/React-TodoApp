@@ -18,8 +18,8 @@ componentDidMount() {
   render() {
     return (
       <div>
-        <input type="text" onChange={(e)=>this.inputChangeHandler(e)} ref={this.inputRef} placeholder="Please enter a Task"></input>
-         <button onClick={this.props.addTodo} >Add</button>
+        <input type="text"  ref={this.inputRef} placeholder="Please enter a Task"></input>
+         <button onClick={()=>this.props.addTodo( this.inputRef.current.value)} >Add</button>
       </div>
     );
   }
